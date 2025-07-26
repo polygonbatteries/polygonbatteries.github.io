@@ -2,39 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Polygon Batteries - Industrial Energy Design System
+All colors MUST be HSL for consistency across light/dark modes.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 13% 9%;
+    --foreground: 210 20% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 12%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 12%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 13% 9%;
+    --primary-glow: 195 100% 60%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 13% 16%;
+    --secondary-foreground: 210 20% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 16%;
+    --muted-foreground: 215 15% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 100% 55%;
+    --accent-foreground: 220 13% 9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 20%;
+    --input: 220 13% 16%;
+    --ring: 195 100% 50%;
+
+    /* Energy/Industrial specific tokens */
+    --electric-blue: 195 100% 50%;
+    --electric-cyan: 180 100% 50%;
+    --warning-amber: 45 100% 55%;
+    --success-green: 145 85% 45%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%), hsl(180 100% 50%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 13% 12%), hsl(220 13% 8%));
+    --gradient-glow: radial-gradient(circle at center, hsl(195 100% 50% / 0.3), transparent 70%);
+    
+    /* Shadows */
+    --shadow-electric: 0 0 40px hsl(195 100% 50% / 0.3);
+    --shadow-card: 0 4px 24px hsl(220 13% 5% / 0.4);
+    --shadow-intense: 0 8px 40px hsl(220 13% 5% / 0.6);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease, border-color 0.3s ease;
 
     --radius: 0.5rem;
 

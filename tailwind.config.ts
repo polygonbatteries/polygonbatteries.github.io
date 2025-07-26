@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -52,6 +53,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				electric: {
+					blue: 'hsl(var(--electric-blue))',
+					cyan: 'hsl(var(--electric-cyan))'
+				},
+				warning: 'hsl(var(--warning-amber))',
+				success: 'hsl(var(--success-green))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +91,32 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'electric-pulse': {
+					'0%, 100%': { 
+						boxShadow: '0 0 20px hsl(var(--electric-blue) / 0.4)',
+						borderColor: 'hsl(var(--electric-blue) / 0.6)'
+					},
+					'50%': { 
+						boxShadow: '0 0 40px hsl(var(--electric-blue) / 0.8)',
+						borderColor: 'hsl(var(--electric-blue))'
+					}
+				},
+				'glow-float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'electric-pulse': 'electric-pulse 2s ease-in-out infinite',
+				'glow-float': 'glow-float 3s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'gradient-electric': 'var(--gradient-primary)',
+				'gradient-dark': 'var(--gradient-dark)',
+				'gradient-glow': 'var(--gradient-glow)'
 			}
 		}
 	},
