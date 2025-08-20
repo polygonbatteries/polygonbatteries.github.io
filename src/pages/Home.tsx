@@ -39,12 +39,14 @@ const Home = () => {
       <header className="border-b border-border bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-electric rounded-full animate-electric-pulse"></div>
+            <div className="flex items-center space-x-3">
+              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-8 h-8" />
               <h1 className="text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
             <nav className="hidden md:flex space-x-6">
               <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
+              <a href="/battery-finder" className="text-muted-foreground hover:text-foreground transition-colors">Battery Finder</a>
+              <a href="/oem-portal" className="text-muted-foreground hover:text-foreground transition-colors">OEM Portal</a>
               <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
             </nav>
@@ -137,7 +139,7 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-6 h-6 bg-gradient-electric rounded-full"></div>
+                <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-6 h-6" />
                 <h4 className="text-lg font-bold text-foreground">Polygon Batteries</h4>
               </div>
               <p className="text-muted-foreground">
