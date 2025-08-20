@@ -40,14 +40,13 @@ const Home = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-8 h-8" />
+              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-12 h-12" />
               <h1 className="text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
             <nav className="hidden md:flex space-x-6">
               <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
               <a href="/battery-finder" className="text-muted-foreground hover:text-foreground transition-colors">Battery Finder</a>
               <a href="/oem-portal" className="text-muted-foreground hover:text-foreground transition-colors">OEM Portal</a>
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
             </nav>
           </div>
@@ -62,12 +61,22 @@ const Home = () => {
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
         <div className="relative container mx-auto px-4 text-center">
+          {/* Logo above hero text */}
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" 
+              alt="Polygon Batteries" 
+              className="w-24 h-24 mx-auto mb-4"
+            />
+          </div>
+          
           <Badge className="mb-6 bg-primary/20 text-primary border-primary/30">
             Professional Backup Power Solutions
           </Badge>
           <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Never Lose Power
-            <span className="text-primary block">When It Matters Most</span>
+            Order Any Battery, Any Size, Any Shape
+            <span className="text-primary block">Plus Installation</span>
+            <span className="text-foreground block text-4xl md:text-5xl mt-2">Never Lose Power</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             Professional battery backup installation services for homes and businesses. 

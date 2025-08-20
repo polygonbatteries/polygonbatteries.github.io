@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Box, Calculator, Download } from "lucide-react";
 import { toast } from "sonner";
+import { BatteryDesigner3D } from "@/components/BatteryDesigner3D";
 
 export default function OEMPortal() {
   const [batterySpecs, setBatterySpecs] = useState({
@@ -160,16 +161,14 @@ export default function OEMPortal() {
                   </div>
                 </Card>
 
-                <Card className="p-8">
-                  <h2 className="text-2xl font-semibold mb-6">3D Preview</h2>
-                  <div className="bg-muted rounded-lg h-80 flex items-center justify-center">
-                    <div className="text-center">
-                      <Box className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                      <p className="text-muted-foreground">3D preview will appear here</p>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Dimensions: {batterySpecs.length || "0"} × {batterySpecs.width || "0"} × {batterySpecs.height || "0"} mm
-                      </p>
-                    </div>
+                <Card className="p-6">
+                  <h2 className="text-2xl font-semibold mb-6">3D Battery Designer</h2>
+                  <div className="bg-card rounded-lg">
+                    <BatteryDesigner3D 
+                      length={parseFloat(batterySpecs.length) || 50}
+                      width={parseFloat(batterySpecs.width) || 30}
+                      height={parseFloat(batterySpecs.height) || 15}
+                    />
                   </div>
                 </Card>
               </div>
