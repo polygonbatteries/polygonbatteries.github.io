@@ -17,9 +17,9 @@ All colors MUST be HSL for consistency across light/dark modes.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 245 75% 35%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
-    --primary-glow: 245 75% 45%;
+    --primary-glow: 221.2 83.2% 63.3%;
 
     --secondary: 210 40% 96%;
     --secondary-foreground: 222.2 84% 4.9%;
@@ -35,21 +35,21 @@ All colors MUST be HSL for consistency across light/dark modes.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 245 75% 35%;
+    --ring: 221.2 83.2% 53.3%;
 
     /* Energy/Industrial specific tokens */
-    --electric-blue: 245 75% 35%;
-    --electric-cyan: 245 75% 40%;
+    --electric-blue: 221.2 83.2% 53.3%;
+    --electric-cyan: 221.2 83.2% 58.3%;
     --warning-amber: 45 100% 55%;
     --success-green: 145 85% 45%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(245 75% 35%), hsl(245 75% 45%));
-    --gradient-dark: linear-gradient(180deg, hsl(240 75% 25%), hsl(245 75% 15%));
-    --gradient-glow: radial-gradient(circle at center, hsl(245 75% 50% / 0.3), transparent 70%);
+    --gradient-primary: linear-gradient(135deg, hsl(221.2 83.2% 53.3%), hsl(221.2 83.2% 63.3%));
+    --gradient-dark: linear-gradient(180deg, hsl(240 10% 3.9%), hsl(240 5.9% 10%));
+    --gradient-glow: radial-gradient(circle at center, hsl(221.2 83.2% 53.3% / 0.3), transparent 70%);
     
     /* Shadows */
-    --shadow-electric: 0 0 40px hsl(245 75% 35% / 0.3);
+    --shadow-electric: 0 0 40px hsl(221.2 83.2% 53.3% / 0.3);
     --shadow-card: 0 4px 24px hsl(220 13% 5% / 0.4);
     --shadow-intense: 0 8px 40px hsl(220 13% 5% / 0.6);
     
@@ -86,7 +86,7 @@ All colors MUST be HSL for consistency across light/dark modes.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 245 75% 45%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 222.2 84% 4.9%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -103,7 +103,7 @@ All colors MUST be HSL for consistency across light/dark modes.
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 245 75% 45%;
+    --ring: 221.2 83.2% 53.3%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

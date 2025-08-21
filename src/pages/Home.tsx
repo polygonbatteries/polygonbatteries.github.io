@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
-import { Zap, Shield, Clock, Wrench, Search, Upload, Menu } from "lucide-react";
+import { Zap, Shield, Clock, Wrench, Menu } from "lucide-react";
 import { useState } from "react";
+import { BatterySearchBar } from "@/components/BatterySearchBar";
 import heroImage from "@/assets/hero-battery-installation.jpg";
 import residentialImage from "@/assets/residential-installation.jpg";
 import commercialImage from "@/assets/commercial-installation.jpg";
@@ -98,52 +98,17 @@ const Home = () => {
             <img 
               src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" 
               alt="Polygon Batteries" 
-              className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4"
+              className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-4"
             />
           </div>
           
           {/* Battery Finder Search Bar */}
-          <div className="mb-8 max-w-2xl mx-auto">
-            <div className="bg-card/90 backdrop-blur-sm rounded-xl p-6 border border-primary/30">
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1 relative">
-                  <Input
-                    type="text"
-                    placeholder="Search for batteries (e.g., laptop battery, car battery)..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full pl-10 bg-background/80"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                </div>
-                <div className="flex gap-2">
-                  <Button onClick={handleSearch} className="bg-primary hover:bg-primary/90">
-                    <Search className="h-4 w-4 mr-2" />
-                    Search
-                  </Button>
-                  <label htmlFor="image-upload" className="cursor-pointer">
-                    <Button variant="outline" className="border-primary/50 hover:bg-primary/10" asChild>
-                      <span>
-                        <Upload className="h-4 w-4 mr-2" />
-                        Upload Image
-                      </span>
-                    </Button>
-                    <input
-                      id="image-upload"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground mt-2 text-center">
-                Search by name or upload an image to find matching batteries
-              </p>
-            </div>
-          </div>
+          <BatterySearchBar 
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            onSearch={handleSearch}
+            onImageUpload={handleImageUpload}
+          />
           <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
             Order Any Battery, Any Size, Any Shape
             <span className="text-primary block">Plus Installation</span>
@@ -190,13 +155,12 @@ const Home = () => {
 
             <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
                   onClick={() => navigate('/oem-portal')}>
-              <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg mb-6 flex items-center justify-center">
-                <div className="text-center">
-                  <Wrench className="h-16 w-16 text-primary mx-auto mb-2" />
-                  <p className="text-primary font-semibold">3D Design Tool</p>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">OEM Portal</h3>
+              <img 
+                src="/lovable-uploads/736a564e-d9c1-438d-a51a-b38598c2e7f1.png" 
+                alt="Battery Collection" 
+                className="w-full h-48 object-contain rounded-lg mb-6 bg-gradient-to-br from-primary/10 to-primary/20 p-4"
+              />
+              <h3 className="text-2xl font-bold text-foreground mb-4">OEM Orders</h3>
               <p className="text-muted-foreground mb-6">
                 Design custom batteries with our 3D tool for wholesale orders.
               </p>

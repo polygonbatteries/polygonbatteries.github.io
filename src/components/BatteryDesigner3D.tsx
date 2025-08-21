@@ -68,20 +68,52 @@ export const BatteryDesigner3D = ({ length, width, height }: BatteryDesigner3DPr
     gridHelper.position.y = -49;
     scene.add(gridHelper);
 
-    // Controls simulation (basic rotation)
-    let mouseX = 0;
-    let mouseY = 0;
+    // Improved mouse controls with drag functionality
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
     let targetRotationX = 0;
     let targetRotationY = 0;
 
-    const onMouseMove = (event: MouseEvent) => {
-      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-      targetRotationX = mouseY * 0.5;
-      targetRotationY = mouseX * 0.5;
+    const onMouseDown = (event: MouseEvent) => {
+      if (event.target === renderer.domElement) {
+        isDragging = true;
+        previousMousePosition = { x: event.clientX, y: event.clientY };
+      }
     };
 
+    const onMouseMove = (event: MouseEvent) => {
+      if (isDragging) {
+        const deltaMove = {
+          x: event.clientX - previousMousePosition.x,
+          y: event.clientY - previousMousePosition.y
+        };
+        
+        targetRotationY += deltaMove.x * 0.01;
+        targetRotationX += deltaMove.y * 0.01;
+        
+        previousMousePosition = { x: event.clientX, y: event.clientY };
+      }
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      const zoomSpeed = 0.1;
+      camera.position.multiplyScalar(1 + event.deltaY * zoomSpeed * 0.01);
+      
+      // Limit zoom range
+      const distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
+      if (distance < 50) camera.position.multiplyScalar(50 / distance);
+      if (distance > 500) camera.position.multiplyScalar(500 / distance);
+    };
+
+    renderer.domElement.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    renderer.domElement.addEventListener('wheel', onWheel);
 
     // Animation loop
     const animate = () => {
@@ -99,7 +131,10 @@ export const BatteryDesigner3D = ({ length, width, height }: BatteryDesigner3DPr
 
     // Cleanup
     return () => {
+      renderer.domElement.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+      renderer.domElement.removeEventListener('wheel', onWheel);
       if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
       }
@@ -186,7 +221,7 @@ export const BatteryDesigner3D = ({ length, width, height }: BatteryDesigner3DPr
           Dimensions: {length || 0} × {width || 0} × {height || 0} mm
         </p>
         <p className="text-xs text-muted-foreground mt-1">
-          Move mouse to rotate • Interactive 3D preview
+          Click and drag to rotate • Scroll to zoom • Interactive 3D preview
         </p>
       </div>
     </div>
