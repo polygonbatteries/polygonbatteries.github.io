@@ -8,48 +8,48 @@ All colors MUST be HSL for consistency across light/dark modes.
 
 @layer base {
   :root {
-    --background: 220 15% 16%;
-    --foreground: 210 20% 98%;
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 220 15% 20%;
-    --card-foreground: 210 20% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 220 15% 20%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 210 100% 35%;
-    --primary-foreground: 210 20% 95%;
-    --primary-glow: 210 100% 45%;
+    --primary: 245 75% 35%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 245 75% 45%;
 
-    --secondary: 220 15% 24%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
 
-    --muted: 220 15% 24%;
-    --muted-foreground: 215 15% 75%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 45 100% 55%;
-    --accent-foreground: 220 15% 16%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 28%;
-    --input: 220 13% 16%;
-    --ring: 195 100% 50%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 245 75% 35%;
 
     /* Energy/Industrial specific tokens */
-    --electric-blue: 210 100% 35%;
-    --electric-cyan: 210 100% 40%;
+    --electric-blue: 245 75% 35%;
+    --electric-cyan: 245 75% 40%;
     --warning-amber: 45 100% 55%;
     --success-green: 145 85% 45%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 35%), hsl(210 100% 40%));
-    --gradient-dark: linear-gradient(180deg, hsl(220 13% 12%), hsl(220 13% 8%));
-    --gradient-glow: radial-gradient(circle at center, hsl(195 100% 50% / 0.3), transparent 70%);
+    --gradient-primary: linear-gradient(135deg, hsl(245 75% 35%), hsl(245 75% 45%));
+    --gradient-dark: linear-gradient(180deg, hsl(240 75% 25%), hsl(245 75% 15%));
+    --gradient-glow: radial-gradient(circle at center, hsl(245 75% 50% / 0.3), transparent 70%);
     
     /* Shadows */
-    --shadow-electric: 0 0 40px hsl(210 100% 35% / 0.3);
+    --shadow-electric: 0 0 40px hsl(245 75% 35% / 0.3);
     --shadow-card: 0 4px 24px hsl(220 13% 5% / 0.4);
     --shadow-intense: 0 8px 40px hsl(220 13% 5% / 0.6);
     
@@ -86,8 +86,8 @@ All colors MUST be HSL for consistency across light/dark modes.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 245 75% 45%;
+    --primary-foreground: 222.2 84% 4.9%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -103,7 +103,7 @@ All colors MUST be HSL for consistency across light/dark modes.
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 245 75% 45%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

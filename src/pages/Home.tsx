@@ -1,14 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
-import { Zap, Shield, Clock, Wrench } from "lucide-react";
+import { Zap, Shield, Clock, Wrench, Search, Upload, Menu } from "lucide-react";
+import { useState } from "react";
 import heroImage from "@/assets/hero-battery-installation.jpg";
 import residentialImage from "@/assets/residential-installation.jpg";
 import commercialImage from "@/assets/commercial-installation.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+      // Navigate to battery finder with the uploaded image
+      navigate('/battery-finder');
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/battery-finder?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   const features = [
     {
@@ -36,20 +56,32 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm">
+      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-12 h-12" />
-              <h1 className="text-2xl font-bold text-foreground">Polygon Batteries</h1>
+              <h1 className="text-xl md:text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
             <nav className="hidden md:flex space-x-6">
               <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
-              <a href="/battery-finder" className="text-muted-foreground hover:text-foreground transition-colors">Battery Finder</a>
-              <a href="/oem-portal" className="text-muted-foreground hover:text-foreground transition-colors">OEM Portal</a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
             </nav>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
           </div>
+          {mobileMenuOpen && (
+            <nav className="md:hidden mt-4 pb-4 space-y-2">
+              <a href="#services" className="block text-muted-foreground hover:text-foreground transition-colors py-2">Services</a>
+              <a href="#contact" className="block text-muted-foreground hover:text-foreground transition-colors py-2">Contact</a>
+            </nav>
+          )}
         </div>
       </header>
 
@@ -66,13 +98,52 @@ const Home = () => {
             <img 
               src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" 
               alt="Polygon Batteries" 
-              className="w-24 h-24 mx-auto mb-4"
+              className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4"
             />
           </div>
           
-          <Badge className="mb-6 bg-primary/20 text-primary border-primary/30">
-            Professional Backup Power Solutions
-          </Badge>
+          {/* Battery Finder Search Bar */}
+          <div className="mb-8 max-w-2xl mx-auto">
+            <div className="bg-card/90 backdrop-blur-sm rounded-xl p-6 border border-primary/30">
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1 relative">
+                  <Input
+                    type="text"
+                    placeholder="Search for batteries (e.g., laptop battery, car battery)..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                    className="w-full pl-10 bg-background/80"
+                  />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                </div>
+                <div className="flex gap-2">
+                  <Button onClick={handleSearch} className="bg-primary hover:bg-primary/90">
+                    <Search className="h-4 w-4 mr-2" />
+                    Search
+                  </Button>
+                  <label htmlFor="image-upload" className="cursor-pointer">
+                    <Button variant="outline" className="border-primary/50 hover:bg-primary/10" asChild>
+                      <span>
+                        <Upload className="h-4 w-4 mr-2" />
+                        Upload Image
+                      </span>
+                    </Button>
+                    <input
+                      id="image-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground mt-2 text-center">
+                Search by name or upload an image to find matching batteries
+              </p>
+            </div>
+          </div>
           <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
             Order Any Battery, Any Size, Any Shape
             <span className="text-primary block">Plus Installation</span>
@@ -84,8 +155,8 @@ const Home = () => {
           </p>
           
           {/* Main CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group max-w-sm"
+          <div className="grid md:grid-cols-3 gap-6 justify-center items-start mb-16 max-w-6xl mx-auto">
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
                   onClick={() => navigate('/quote/home')}>
               <img 
                 src={residentialImage} 
@@ -101,7 +172,7 @@ const Home = () => {
               </Button>
             </Card>
 
-            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group max-w-sm"
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
                   onClick={() => navigate('/quote/business')}>
               <img 
                 src={commercialImage} 
@@ -114,6 +185,23 @@ const Home = () => {
               </p>
               <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
                 Get Business Quote <Shield className="ml-2 h-5 w-5" />
+              </Button>
+            </Card>
+
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
+                  onClick={() => navigate('/oem-portal')}>
+              <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg mb-6 flex items-center justify-center">
+                <div className="text-center">
+                  <Wrench className="h-16 w-16 text-primary mx-auto mb-2" />
+                  <p className="text-primary font-semibold">3D Design Tool</p>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-foreground mb-4">OEM Portal</h3>
+              <p className="text-muted-foreground mb-6">
+                Design custom batteries with our 3D tool for wholesale orders.
+              </p>
+              <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
+                Access Portal <Wrench className="ml-2 h-5 w-5" />
               </Button>
             </Card>
           </div>
