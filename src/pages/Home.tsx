@@ -173,21 +173,21 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-card/30">
+      <section id="features" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-foreground mb-4">Why Choose Polygon Batteries?</h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Polygon Batteries?</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
               Professional installation, premium components, and reliable service for your backup power needs.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="p-6 bg-card/80 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300">
+              <Card key={index} className="p-6 bg-white border-gray-200 hover:border-primary/50 transition-all duration-300 shadow-sm">
                 <div className="mb-4">{feature.icon}</div>
-                <h4 className="text-xl font-semibold text-foreground mb-3">{feature.title}</h4>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <h4 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h4>
+                <p className="text-gray-600">{feature.description}</p>
               </Card>
             ))}
           </div>
