@@ -60,7 +60,7 @@ const Home = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-12 h-12" />
+              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-16 h-16" />
               <h1 className="text-xl md:text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
             <nav className="hidden md:flex space-x-6">
@@ -173,7 +173,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h3 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Polygon Batteries?</h3>
@@ -194,8 +194,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-card border-t border-border py-12">
+      {/* Footer/Contact Section */}
+      <footer id="contact" className="bg-card border-t border-border py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
