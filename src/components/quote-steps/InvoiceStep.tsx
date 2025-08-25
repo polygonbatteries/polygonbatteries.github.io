@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, ArrowLeft, Zap, MapPin, Clock } from "lucide-react";
-import { QuoteData } from "../QuoteWizard";
+import { OrderData as QuoteData } from "../OrderWizard";
 
 interface InvoiceStepProps {
   quoteData: QuoteData;

@@ -36,6 +36,16 @@ export default function OEMPortal() {
 
   const [estimatedCost, setEstimatedCost] = useState(0);
   const [activeTab, setActiveTab] = useState("design");
+  const [isSpecsComplete, setIsSpecsComplete] = useState(false);
+
+  const checkSpecsComplete = () => {
+    const volume = parseFloat(batterySpecs.length) * parseFloat(batterySpecs.width) * parseFloat(batterySpecs.height);
+    const capacity = parseFloat(batterySpecs.capacity);
+    const quantity = parseInt(batterySpecs.quantity);
+    const hasApplication = batterySpecs.application.length > 0;
+    
+    return volume > 0 && capacity > 0 && quantity > 0 && hasApplication;
+  };
 
   const calculateCost = () => {
     const volume = parseFloat(batterySpecs.length) * parseFloat(batterySpecs.width) * parseFloat(batterySpecs.height);
@@ -68,7 +78,13 @@ export default function OEMPortal() {
       const total = chemistryCost * quantity * quantityDiscount + 2500; // Base setup cost
       
       setEstimatedCost(total);
-      toast.success("Advanced cost estimate calculated!");
+      setIsSpecsComplete(true);
+      toast.success("Cost calculated! Proceeding to checkout...");
+      
+      // Auto-advance to quote tab after calculation
+      setTimeout(() => {
+        setActiveTab("quote");
+      }, 1500);
     } else {
       toast.error("Please fill in all required fields for calculation");
     }
@@ -135,7 +151,7 @@ export default function OEMPortal() {
               </TabsTrigger>
               <TabsTrigger value="quote" className="flex items-center gap-2">
                 <Download className="w-4 h-4" />
-                Generate Quote
+                Complete Order
               </TabsTrigger>
             </TabsList>
 
@@ -215,6 +231,20 @@ export default function OEMPortal() {
                         placeholder="e.g., IP67 rating, -40°C operation, military spec..."
                       />
                     </div>
+
+                    {checkSpecsComplete() && (
+                      <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-semibold text-green-800">Specs Complete!</h4>
+                            <p className="text-sm text-green-600">Ready to calculate and proceed to order</p>
+                          </div>
+                          <Button onClick={() => setActiveTab("calculate")} className="bg-green-600 hover:bg-green-700">
+                            Next: Calculate →
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </Card>
               </div>
@@ -338,8 +368,8 @@ export default function OEMPortal() {
                     <h3 className="text-lg font-semibold">Quick Cost Estimate</h3>
                     <p className="text-sm text-muted-foreground">Get a basic production cost estimate</p>
                   </div>
-                  <Button onClick={calculateCost} className="ml-4">
-                    Calculate Basic Cost
+                  <Button onClick={calculateCost} className="ml-4" disabled={!checkSpecsComplete()}>
+                    Calculate & Proceed to Order →
                   </Button>
                 </div>
                 
@@ -498,7 +528,7 @@ export default function OEMPortal() {
                     <div className="space-y-4">
                       <Button onClick={generateQuote} className="w-full" size="lg">
                         <Mail className="w-4 h-4 mr-2" />
-                        Generate Professional Quote
+                        Complete OEM Order
                       </Button>
                       
                       <div className="text-center text-sm text-muted-foreground">

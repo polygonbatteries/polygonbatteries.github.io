@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { CreditCard, ArrowLeft, Lock, CheckCircle } from "lucide-react";
-import { QuoteData } from "../QuoteWizard";
+import { OrderData as QuoteData } from "../OrderWizard";
 
 interface CheckoutStepProps {
   quoteData: QuoteData;

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, FileText, Zap } from "lucide-react";
-import { QuoteData } from "../QuoteWizard";
+import { OrderData as QuoteData } from "../OrderWizard";
 
 interface UtilityBillStepProps {
   quoteData: QuoteData;

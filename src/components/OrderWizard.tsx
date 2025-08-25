@@ -10,7 +10,7 @@ import { AddressStep } from "./quote-steps/AddressStep";
 import { InvoiceStep } from "./quote-steps/InvoiceStep";
 import { CheckoutStep } from "./quote-steps/CheckoutStep";
 
-export interface QuoteData {
+export interface OrderData {
   installationType: 'home' | 'business';
   kwhUsage: number;
   manualKwh?: number;
@@ -31,7 +31,7 @@ export interface QuoteData {
   };
 }
 
-interface QuoteWizardProps {
+interface OrderWizardProps {
   installationType: 'home' | 'business';
 }
 
@@ -39,13 +39,13 @@ const steps = [
   { id: 'utility', title: 'Utility Bill', description: 'Upload your electric bill' },
   { id: 'duration', title: 'Backup Duration', description: 'Select backup time needed' },
   { id: 'address', title: 'Installation Address', description: 'Where to install' },
-  { id: 'invoice', title: 'Review Quote', description: 'Review your quote' },
+  { id: 'invoice', title: 'Review Order', description: 'Review your order' },
   { id: 'checkout', title: 'Payment', description: 'Complete your order' },
 ];
 
-export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
+export const OrderWizard = ({ installationType }: OrderWizardProps) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [quoteData, setQuoteData] = useState<QuoteData>({
+  const [orderData, setOrderData] = useState<OrderData>({
     installationType,
     kwhUsage: 0,
     backupDuration: '',
@@ -63,8 +63,8 @@ export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
     },
   });
 
-  const updateQuoteData = (data: Partial<QuoteData>) => {
-    setQuoteData(prev => ({ ...prev, ...data }));
+  const updateOrderData = (data: Partial<OrderData>) => {
+    setOrderData(prev => ({ ...prev, ...data }));
   };
 
   const nextStep = () => {
@@ -86,16 +86,16 @@ export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
       case 0:
         return (
           <UtilityBillStep
-            quoteData={quoteData}
-            updateQuoteData={updateQuoteData}
+            quoteData={orderData}
+            updateQuoteData={updateOrderData}
             onNext={nextStep}
           />
         );
       case 1:
         return (
           <BackupDurationStep
-            quoteData={quoteData}
-            updateQuoteData={updateQuoteData}
+            quoteData={orderData}
+            updateQuoteData={updateOrderData}
             onNext={nextStep}
             onPrev={prevStep}
           />
@@ -103,8 +103,8 @@ export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
       case 2:
         return (
           <AddressStep
-            quoteData={quoteData}
-            updateQuoteData={updateQuoteData}
+            quoteData={orderData}
+            updateQuoteData={updateOrderData}
             onNext={nextStep}
             onPrev={prevStep}
           />
@@ -112,8 +112,8 @@ export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
       case 3:
         return (
           <InvoiceStep
-            quoteData={quoteData}
-            updateQuoteData={updateQuoteData}
+            quoteData={orderData}
+            updateQuoteData={updateOrderData}
             onNext={nextStep}
             onPrev={prevStep}
           />
@@ -121,7 +121,7 @@ export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
       case 4:
         return (
           <CheckoutStep
-            quoteData={quoteData}
+            quoteData={orderData}
             onPrev={prevStep}
           />
         );
@@ -135,12 +135,22 @@ export const QuoteWizard = ({ installationType }: QuoteWizardProps) => {
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-6 h-6 bg-gradient-electric rounded-full animate-electric-pulse"></div>
-            <h1 className="text-2xl font-bold text-foreground">Polygon Batteries</h1>
+          <div className="flex items-center justify-between mb-4">
+            <Button 
+              variant="outline" 
+              onClick={() => window.location.href = '/'}
+              className="text-sm"
+            >
+              ← Back to Home
+            </Button>
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 bg-gradient-electric rounded-full animate-electric-pulse"></div>
+              <h1 className="text-2xl font-bold text-foreground">Polygon Batteries</h1>
+            </div>
+            <div className="w-24"></div> {/* Spacer for centering */}
           </div>
           <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">
-            {installationType === 'home' ? 'Residential' : 'Commercial'} Installation Quote
+            {installationType === 'home' ? 'Residential' : 'Commercial'} Installation Order
           </Badge>
         </div>
 

@@ -122,7 +122,7 @@ const Home = () => {
           {/* Main CTA Buttons */}
           <div className="grid md:grid-cols-3 gap-6 justify-center items-start mb-16 max-w-6xl mx-auto">
             <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
-                  onClick={() => navigate('/quote/home')}>
+                  onClick={() => navigate('/order/home')}>
               <img 
                 src={residentialImage} 
                 alt="Residential Installation" 
@@ -133,12 +133,12 @@ const Home = () => {
                 Protect your family and home with reliable backup power systems.
               </p>
               <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
-                Get Home Quote <Zap className="ml-2 h-5 w-5" />
+                Order Home Installation <Zap className="ml-2 h-5 w-5" />
               </Button>
             </Card>
 
             <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
-                  onClick={() => navigate('/quote/business')}>
+                  onClick={() => navigate('/order/business')}>
               <img 
                 src={commercialImage} 
                 alt="Commercial Installation" 
@@ -149,7 +149,7 @@ const Home = () => {
                 Keep your business running with commercial-grade backup power.
               </p>
               <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
-                Get Business Quote <Shield className="ml-2 h-5 w-5" />
+                Order Business Installation <Shield className="ml-2 h-5 w-5" />
               </Button>
             </Card>
 
@@ -190,6 +190,120 @@ const Home = () => {
                 <p className="text-gray-600">{feature.description}</p>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Manufacturing Process Gallery */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Manufacturing Excellence</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              State-of-the-art lithium polymer battery production facilities and processes
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/dc90c0d6-f599-4c68-9469-d51774bac39b.png" 
+                alt="Lithium Polymer Line Machinery Cost" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Production Line Investment</h4>
+              <p className="text-gray-600 text-sm">Complete equipment production line for manufacturing batteries from scratch</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/32d400fa-cd79-4ae1-b5d8-959d4f987f74.png" 
+                alt="Solar and RF Integrated Batteries" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Solar Integration</h4>
+              <p className="text-gray-600 text-sm">Advanced RF energy harvesting technology with solar integration</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/de3975bc-b162-4cee-8de2-2d2ba7c921ee.png" 
+                alt="Production Outputs" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Custom Outputs</h4>
+              <p className="text-gray-600 text-sm">Different sizes, shapes and capacity for specific OEM applications</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/abadfbd4-3928-44f6-bd51-ee541ad0293c.png" 
+                alt="Mitsubishi Solutions Layout" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Production Layout</h4>
+              <p className="text-gray-600 text-sm">Mitsubishi solutions for lithium battery manufacturing division</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/b781b11d-608e-4f40-8b38-14537ad4523c.png" 
+                alt="Automatic Pouch Cell Production" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Automated Production</h4>
+              <p className="text-gray-600 text-sm">Automatic pouch cell production line with quality control</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/df3fbd9a-e73d-4417-8dad-6c93583b89b6.png" 
+                alt="Production Flow Diagram" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Production Process</h4>
+              <p className="text-gray-600 text-sm">Complete electrode preparation and assembly workflow</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/22debe8c-46de-4daa-bbf0-86d5400fff18.png" 
+                alt="Formation and Sealing" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Formation & Sealing</h4>
+              <p className="text-gray-600 text-sm">Advanced battery case formation and sealing processes</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/ffc7cfbc-938c-4ed0-9382-7f8f12645a2b.png" 
+                alt="Cell Assembly Process" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Cell Assembly</h4>
+              <p className="text-gray-600 text-sm">Li-ion cell assembly using stacking and winding methods</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <img 
+                src="/lovable-uploads/945ee79d-d87e-436c-93f2-df5f7c70f13c.png" 
+                alt="Electrode Sheet Preparation" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Electrode Preparation</h4>
+              <p className="text-gray-600 text-sm">Precision electrode sheet preparation and processing</p>
+            </Card>
+            
+            <Card className="p-4 bg-white shadow-lg hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-1">
+              <img 
+                src="/lovable-uploads/ce4a6b7d-e18a-41a1-97cf-245a6bb13a8e.png" 
+                alt="South Africa Manufacturing Plant" 
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">South Africa Plant</h4>
+              <p className="text-gray-600 text-sm">Main manufacturing facility producing custom OEM batteries</p>
+            </Card>
           </div>
         </div>
       </section>
