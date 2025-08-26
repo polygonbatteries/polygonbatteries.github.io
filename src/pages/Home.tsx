@@ -192,9 +192,9 @@ const Home = () => {
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="relative py-20 overflow-hidden bg-brand-600">
+      <section id="hero" className="relative py-20 overflow-hidden bg-white">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-10"
+          className="absolute inset-0 bg-cover bg-center opacity-5"
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
         <div className="relative container mx-auto px-4 text-center">
@@ -218,12 +218,12 @@ const Home = () => {
             className="mb-12"
           />
           
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
             Order Any Battery, Any Size, Any Shape
-            <span className="text-white/90 block">Plus Installation</span>
-            <span className="text-white block text-4xl md:text-5xl mt-2">Never Lose Power</span>
+            <span className="text-gray-800 block">Plus Installation</span>
+            <span className="text-gray-900 block text-4xl md:text-5xl mt-2">Never Lose Power</span>
           </h2>
-          <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
             Professional battery backup installation services for homes and businesses. 
             LiFePO4 technology with certified electrician installation.
           </p>
@@ -233,7 +233,7 @@ const Home = () => {
             <Button 
               onClick={() => openModal('order')}
               size="lg" 
-              className="bg-white text-brand-600 hover:bg-gray-100 text-lg px-8 py-4 h-auto focus:ring-2 focus:ring-white"
+              className="bg-brand-600 text-white hover:bg-brand-700 text-lg px-8 py-4 h-auto focus:ring-2 focus:ring-brand-600"
             >
               Start an Order
             </Button>
@@ -241,7 +241,7 @@ const Home = () => {
               onClick={() => openModal('contact')}
               variant="outline" 
               size="lg" 
-              className="border-white text-white hover:bg-white hover:text-brand-600 text-lg px-8 py-4 h-auto focus:ring-2 focus:ring-white"
+              className="border-brand-600 text-brand-600 hover:bg-brand-600 hover:text-white text-lg px-8 py-4 h-auto focus:ring-2 focus:ring-brand-600"
             >
               Contact Us
             </Button>

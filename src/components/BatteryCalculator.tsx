@@ -156,12 +156,12 @@ export const BatteryCalculator = ({
         {results && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Energy Metrics */}
-            <Card className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+            <Card className="p-4 bg-white border border-gray-200">
               <div className="flex items-center gap-2 mb-3">
-                <Zap className="w-4 h-4 text-blue-600" />
-                <h4 className="font-semibold text-blue-900">Energy Metrics</h4>
+                <Zap className="w-4 h-4 text-brand-600" />
+                <h4 className="font-semibold text-slate-900">Energy Metrics</h4>
               </div>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-slate-700">
                 <div className="flex justify-between">
                   <span>Total Energy:</span>
                   <span className="font-semibold">{results.totalEnergy.toFixed(1)} Wh</span>
@@ -178,12 +178,12 @@ export const BatteryCalculator = ({
             </Card>
 
             {/* Physical Properties */}
-            <Card className="p-4 bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+            <Card className="p-4 bg-white border border-gray-200">
               <div className="flex items-center gap-2 mb-3">
-                <Weight className="w-4 h-4 text-green-600" />
-                <h4 className="font-semibold text-green-900">Physical Properties</h4>
+                <Weight className="w-4 h-4 text-brand-600" />
+                <h4 className="font-semibold text-slate-900">Physical Properties</h4>
               </div>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-slate-700">
                 <div className="flex justify-between">
                   <span>Total Weight:</span>
                   <span className="font-semibold">{results.totalWeight.toFixed(2)} kg</span>
@@ -200,12 +200,12 @@ export const BatteryCalculator = ({
             </Card>
 
             {/* Cost Analysis */}
-            <Card className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+            <Card className="p-4 bg-white border border-gray-200">
               <div className="flex items-center gap-2 mb-3">
-                <Calculator className="w-4 h-4 text-purple-600" />
-                <h4 className="font-semibold text-purple-900">Cost Analysis</h4>
+                <Calculator className="w-4 h-4 text-brand-600" />
+                <h4 className="font-semibold text-slate-900">Cost Analysis</h4>
               </div>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-slate-700">
                 <div className="flex justify-between">
                   <span>Total Cost:</span>
                   <span className="font-semibold">${results.totalCost.toFixed(2)}</span>
@@ -222,12 +222,12 @@ export const BatteryCalculator = ({
             </Card>
 
             {/* Performance Rating */}
-            <Card className="p-4 bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+            <Card className="p-4 bg-white border border-gray-200">
               <div className="flex items-center gap-2 mb-3">
-                <Thermometer className="w-4 h-4 text-orange-600" />
-                <h4 className="font-semibold text-orange-900">Performance Rating</h4>
+                <Thermometer className="w-4 h-4 text-brand-600" />
+                <h4 className="font-semibold text-slate-900">Performance Rating</h4>
               </div>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-slate-700">
                 <div className="flex justify-between">
                   <span>Energy Rating:</span>
                   <span className="font-semibold">
@@ -246,7 +246,7 @@ export const BatteryCalculator = ({
                 </div>
                 <div className="flex justify-between">
                   <span>Overall Grade:</span>
-                  <span className="font-semibold text-orange-600">
+                  <span className="font-semibold text-brand-600">
                     {results.energyDensity > 250 && results.costPerUnit < 20 ? 'A+' :
                      results.energyDensity > 200 && results.costPerUnit < 25 ? 'A' :
                      results.energyDensity > 150 && results.costPerUnit < 35 ? 'B' : 'C'}

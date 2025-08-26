@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { ShapeSelector } from "@/components/ShapeSelector";
 import { BatteryCalculator } from "@/components/BatteryCalculator";
 import { BatteryShape } from "@/components/BatteryShape3D";
+import { Battery2DDesigner } from "@/components/Battery2DDesigner";
 
 export default function OEMPortal() {
   const [batterySpecs, setBatterySpecs] = useState({
@@ -90,17 +91,38 @@ export default function OEMPortal() {
     }
   };
 
-  const generateQuote = () => {
+  const generateQuote = async () => {
     if (!clientInfo.company || !clientInfo.email) {
       toast.error("Please provide company name and contact email");
       return;
     }
     
-    // Simulate API call
-    setTimeout(() => {
-      toast.success("Detailed quote generated and sent to " + clientInfo.email);
-      setActiveTab("quote");
-    }, 1500);
+    try {
+      // Submit to Formspree (replace with your actual endpoint)
+      const response = await fetch('https://formspree.io/f/your-form-id', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderType: 'OEM Custom Battery',
+          clientInfo,
+          batterySpecs,
+          estimatedCost,
+          timestamp: new Date().toISOString(),
+          quoteId: `OEM-${Date.now()}`
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Order submitted successfully! You'll receive a detailed quote within 24 hours.");
+      } else {
+        throw new Error('Failed to submit order');
+      }
+    } catch (error) {
+      console.error('Order submission error:', error);
+      toast.error("Failed to submit order. Please try again or contact us directly.");
+    }
   };
 
   const downloadSpecSheet = () => {
@@ -136,10 +158,14 @@ export default function OEMPortal() {
 
         <div className="max-w-7xl mx-auto">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="design" className="flex items-center gap-2">
                 <Box className="w-4 h-4" />
                 Design & Shape
+              </TabsTrigger>
+              <TabsTrigger value="2d-designer" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                2D Designer
               </TabsTrigger>
               <TabsTrigger value="specs" className="flex items-center gap-2">
                 <Building2 className="w-4 h-4" />
@@ -248,6 +274,10 @@ export default function OEMPortal() {
                   </div>
                 </Card>
               </div>
+            </TabsContent>
+
+            <TabsContent value="2d-designer" className="mt-8">
+              <Battery2DDesigner />
             </TabsContent>
 
             <TabsContent value="specs" className="mt-8">
