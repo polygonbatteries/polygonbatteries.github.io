@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, ArrowLeft, Zap, MapPin, Clock } from "lucide-react";
+import { FileText, ArrowLeft, Battery, MapPin, Clock } from "lucide-react";
 import { OrderData as QuoteData } from "../OrderWizard";
 
 interface InvoiceStepProps {
@@ -26,7 +26,7 @@ export const InvoiceStep = ({ quoteData, onNext, onPrev }: InvoiceStepProps) => 
         {/* Installation Type */}
         <Card className="p-4 bg-secondary/30">
           <div className="flex items-center space-x-3">
-            <Zap className="h-6 w-6 text-primary" />
+            <Battery className="h-6 w-6 text-primary" />
             <div>
               <h4 className="font-semibold text-foreground">Installation Type</h4>
               <p className="text-muted-foreground">
@@ -42,7 +42,7 @@ export const InvoiceStep = ({ quoteData, onNext, onPrev }: InvoiceStepProps) => 
         {/* Energy Usage */}
         <Card className="p-4 bg-secondary/30">
           <div className="flex items-center space-x-3">
-            <Zap className="h-6 w-6 text-primary" />
+            <Battery className="h-6 w-6 text-primary" />
             <div>
               <h4 className="font-semibold text-foreground">Energy Usage</h4>
               <p className="text-muted-foreground">

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, Zap, Weight, Thermometer } from "lucide-react";
+import { Calculator, Battery, Weight, Thermometer } from "lucide-react";
 import { BatteryShape } from "./BatteryShape3D";
 
 interface BatteryCalculatorProps {
@@ -158,7 +158,7 @@ export const BatteryCalculator = ({
             {/* Energy Metrics */}
             <Card className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
               <div className="flex items-center gap-2 mb-3">
-                <Zap className="w-4 h-4 text-blue-600" />
+                <Battery className="w-4 h-4 text-blue-600" />
                 <h4 className="font-semibold text-blue-900">Energy Metrics</h4>
               </div>
               <div className="space-y-2 text-sm">

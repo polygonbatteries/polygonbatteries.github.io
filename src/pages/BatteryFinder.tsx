@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Upload, Search, Battery, Zap } from "lucide-react";
+import { Upload, Search, Battery, Cpu } from "lucide-react";
 import { toast } from "sonner";
 
 export default function BatteryFinder() {
@@ -140,7 +140,7 @@ export default function BatteryFinder() {
 
           <Card className="p-8">
             <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-              <Zap className="w-6 h-6 text-primary" />
+              <Cpu className="w-6 h-6 text-primary" />
               Matching Results
             </h2>
             

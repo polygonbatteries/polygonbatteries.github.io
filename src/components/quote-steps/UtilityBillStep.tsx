@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Upload, FileText, Zap } from "lucide-react";
+import { Upload, FileText, Battery } from "lucide-react";
 import { OrderData as QuoteData } from "../OrderWizard";
 
 interface UtilityBillStepProps {
@@ -49,7 +49,7 @@ export const UtilityBillStep = ({ quoteData, updateQuoteData, onNext }: UtilityB
     <Card className="p-8 bg-card/80 backdrop-blur-sm">
       <div className="space-y-6">
         <div className="text-center">
-          <Zap className="h-12 w-12 text-primary mx-auto mb-4" />
+          <Battery className="h-12 w-12 text-primary mx-auto mb-4" />
           <h3 className="text-2xl font-bold text-foreground mb-2">Upload Your Electric Utility Bill</h3>
           <p className="text-muted-foreground">
             We'll analyze your energy usage to recommend the right backup power solution.
@@ -98,7 +98,7 @@ export const UtilityBillStep = ({ quoteData, updateQuoteData, onNext }: UtilityB
           {extractedKwh && (
             <Card className="p-4 bg-primary/10 border-primary/30">
               <div className="flex items-center space-x-3">
-                <Zap className="h-6 w-6 text-primary" />
+                <Battery className="h-6 w-6 text-primary" />
                 <div>
                   <p className="font-medium text-foreground">
                     Extracted Usage: {extractedKwh} kWh

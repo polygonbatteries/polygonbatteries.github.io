@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { Zap, Shield, Clock, Wrench, Menu } from "lucide-react";
+import { Battery, Shield, Clock, Wrench, Menu } from "lucide-react";
 import { useState } from "react";
 import { BatterySearchBar } from "@/components/BatterySearchBar";
 import heroImage from "@/assets/hero-battery-installation.jpg";
@@ -32,7 +32,7 @@ const Home = () => {
 
   const features = [
     {
-      icon: <Zap className="h-8 w-8 text-primary" />,
+      icon: <Battery className="h-8 w-8 text-primary" />,
       title: "Instant Backup Power",
       description: "LiFePO4 batteries provide immediate, reliable backup power when you need it most.",
     },
@@ -60,11 +60,14 @@ const Home = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-16 h-16" />
+              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-20 h-20" />
               <h1 className="text-xl md:text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
-            <nav className="hidden md:flex space-x-6">
+            <nav className="hidden md:flex items-center space-x-6">
               <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
+              <Button variant="outline" onClick={() => navigate('/battery-finder')}>
+                Battery Finder
+              </Button>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
             </nav>
             <Button
@@ -79,6 +82,9 @@ const Home = () => {
           {mobileMenuOpen && (
             <nav className="md:hidden mt-4 pb-4 space-y-2">
               <a href="#services" className="block text-muted-foreground hover:text-foreground transition-colors py-2">Services</a>
+              <Button variant="outline" onClick={() => navigate('/battery-finder')} className="w-full">
+                Battery Finder
+              </Button>
               <a href="#contact" className="block text-muted-foreground hover:text-foreground transition-colors py-2">Contact</a>
             </nav>
           )}
@@ -120,7 +126,7 @@ const Home = () => {
           </p>
           
           {/* Main CTA Buttons */}
-          <div className="grid md:grid-cols-3 gap-6 justify-center items-start mb-16 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center items-start mb-16 max-w-7xl mx-auto">
             <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
                   onClick={() => navigate('/order/home')}>
               <img 
@@ -133,7 +139,7 @@ const Home = () => {
                 Protect your family and home with reliable backup power systems.
               </p>
               <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
-                Order Home Installation <Zap className="ml-2 h-5 w-5" />
+                Order Home Installation <Battery className="ml-2 h-5 w-5" />
               </Button>
             </Card>
 
@@ -166,6 +172,34 @@ const Home = () => {
               </p>
               <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
                 Access Portal <Wrench className="ml-2 h-5 w-5" />
+              </Button>
+            </Card>
+
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group">
+              <div className="w-full h-48 rounded-lg mb-6 bg-gradient-to-br from-green-100 to-blue-100 p-4 flex items-center justify-center">
+                <div className="text-center">
+                  <Battery className="w-16 h-16 text-primary mx-auto mb-2" />
+                  <div className="text-xs text-muted-foreground">QR Monitoring</div>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-foreground mb-4">Polygon Batteries Cloud</h3>
+              <p className="text-muted-foreground mb-6">
+                Track every battery we sell through BMS or QR codes. Monitor performance, usage patterns, and get replacement alerts for all your devices.
+              </p>
+              <div className="text-sm text-muted-foreground mb-4">
+                <div className="grid grid-cols-2 gap-1">
+                  <div>• TV remotes</div>
+                  <div>• Car key fobs</div>
+                  <div>• Smartphones</div>
+                  <div>• Smart speakers</div>
+                  <div>• AirPods</div>
+                  <div>• Laptops</div>
+                  <div>• Smartwatches</div>
+                  <div>• Game controllers</div>
+                </div>
+              </div>
+              <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
+                View Dashboard <Battery className="ml-2 h-5 w-5" />
               </Button>
             </Card>
           </div>
