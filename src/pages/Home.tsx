@@ -61,7 +61,7 @@ const Home = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-20 h-20" />
+              <img src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" alt="Polygon Batteries" className="w-32 h-32" />
               <h1 className="text-xl md:text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
