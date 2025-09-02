@@ -149,104 +149,109 @@ export const BatteryCalculator = ({
           </div>
         </div>
 
-        <Button onClick={calculateSpecs} className="w-full mb-6">
-          Recalculate Specifications
-        </Button>
+        <div className="flex gap-4 mb-6">
+          <Button onClick={calculateSpecs} className="flex-1">
+            Recalculate Specifications
+          </Button>
+          <Button variant="outline" className="flex-1">
+            Next: Complete Order →
+          </Button>
+        </div>
 
         {results && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Energy Metrics */}
-            <Card className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+            <Card className="p-4 bg-primary/5 border-primary/20">
               <div className="flex items-center gap-2 mb-3">
-                <Battery className="w-4 h-4 text-blue-600" />
-                <h4 className="font-semibold text-blue-900">Energy Metrics</h4>
+                <Battery className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Energy Metrics</h4>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Total Energy:</span>
-                  <span className="font-semibold">{results.totalEnergy.toFixed(1)} Wh</span>
+                  <span className="text-muted-foreground">Total Energy:</span>
+                  <span className="font-semibold text-foreground">{results.totalEnergy.toFixed(1)} Wh</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Energy Density:</span>
-                  <span className="font-semibold">{results.energyDensity.toFixed(1)} Wh/L</span>
+                  <span className="text-muted-foreground">Energy Density:</span>
+                  <span className="font-semibold text-foreground">{results.energyDensity.toFixed(1)} Wh/L</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Packing Efficiency:</span>
-                  <span className="font-semibold">{results.packingEfficiency.toFixed(1)}%</span>
+                  <span className="text-muted-foreground">Packing Efficiency:</span>
+                  <span className="font-semibold text-foreground">{results.packingEfficiency.toFixed(1)}%</span>
                 </div>
               </div>
             </Card>
 
             {/* Physical Properties */}
-            <Card className="p-4 bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+            <Card className="p-4 bg-secondary/50 border-secondary">
               <div className="flex items-center gap-2 mb-3">
-                <Weight className="w-4 h-4 text-green-600" />
-                <h4 className="font-semibold text-green-900">Physical Properties</h4>
+                <Weight className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Physical Properties</h4>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Total Weight:</span>
-                  <span className="font-semibold">{results.totalWeight.toFixed(2)} kg</span>
+                  <span className="text-muted-foreground">Total Weight:</span>
+                  <span className="font-semibold text-foreground">{results.totalWeight.toFixed(2)} kg</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Life Cycles:</span>
-                  <span className="font-semibold">{results.estimatedLifeCycles.toLocaleString()}</span>
+                  <span className="text-muted-foreground">Life Cycles:</span>
+                  <span className="font-semibold text-foreground">{results.estimatedLifeCycles.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Operating Range:</span>
-                  <span className="font-semibold">{results.operatingTemp.min}°C to {results.operatingTemp.max}°C</span>
+                  <span className="text-muted-foreground">Operating Range:</span>
+                  <span className="font-semibold text-foreground">{results.operatingTemp.min}°C to {results.operatingTemp.max}°C</span>
                 </div>
               </div>
             </Card>
 
             {/* Cost Analysis */}
-            <Card className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+            <Card className="p-4 bg-accent/20 border-accent/40">
               <div className="flex items-center gap-2 mb-3">
-                <Calculator className="w-4 h-4 text-purple-600" />
-                <h4 className="font-semibold text-purple-900">Cost Analysis</h4>
+                <Calculator className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Cost Analysis</h4>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Total Cost:</span>
-                  <span className="font-semibold">${results.totalCost.toFixed(2)}</span>
+                  <span className="text-muted-foreground">Total Cost:</span>
+                  <span className="font-semibold text-foreground">${results.totalCost.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Cost Per Unit:</span>
-                  <span className="font-semibold">${results.costPerUnit.toFixed(2)}</span>
+                  <span className="text-muted-foreground">Cost Per Unit:</span>
+                  <span className="font-semibold text-foreground">${results.costPerUnit.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Cost Per Wh:</span>
-                  <span className="font-semibold">${(results.totalCost / results.totalEnergy).toFixed(3)}</span>
+                  <span className="text-muted-foreground">Cost Per Wh:</span>
+                  <span className="font-semibold text-foreground">${(results.totalCost / results.totalEnergy).toFixed(3)}</span>
                 </div>
               </div>
             </Card>
 
             {/* Performance Rating */}
-            <Card className="p-4 bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+            <Card className="p-4 bg-muted/30 border-muted">
               <div className="flex items-center gap-2 mb-3">
-                <Thermometer className="w-4 h-4 text-orange-600" />
-                <h4 className="font-semibold text-orange-900">Performance Rating</h4>
+                <Thermometer className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Performance Rating</h4>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Energy Rating:</span>
-                  <span className="font-semibold">
+                  <span className="text-muted-foreground">Energy Rating:</span>
+                  <span className="font-semibold text-foreground">
                     {results.energyDensity > 300 ? 'Excellent' : 
                      results.energyDensity > 200 ? 'Good' : 
                      results.energyDensity > 100 ? 'Average' : 'Below Average'}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Cost Efficiency:</span>
-                  <span className="font-semibold">
+                  <span className="text-muted-foreground">Cost Efficiency:</span>
+                  <span className="font-semibold text-foreground">
                     {results.costPerUnit < 5 ? 'Excellent' : 
                      results.costPerUnit < 15 ? 'Good' : 
                      results.costPerUnit < 30 ? 'Average' : 'Expensive'}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Overall Grade:</span>
-                  <span className="font-semibold text-orange-600">
+                  <span className="text-muted-foreground">Overall Grade:</span>
+                  <span className="font-semibold text-primary">
                     {results.energyDensity > 250 && results.costPerUnit < 20 ? 'A+' :
                      results.energyDensity > 200 && results.costPerUnit < 25 ? 'A' :
                      results.energyDensity > 150 && results.costPerUnit < 35 ? 'B' : 'C'}

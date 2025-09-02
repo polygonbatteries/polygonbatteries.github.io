@@ -24,9 +24,11 @@ export interface OrderData {
   };
   calculatedCost: {
     batteryAhNeeded?: number;
+    batteryCost?: number;
     laborCost: number;
     inverterCost: number;
     materialsCost: number;
+    permitsCost?: number;
     totalCost: number;
   };
 }

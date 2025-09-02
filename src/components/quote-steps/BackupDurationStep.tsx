@@ -27,26 +27,42 @@ export const BackupDurationStep = ({ quoteData, updateQuoteData, onNext, onPrev 
   const [calculatedCost, setCalculatedCost] = useState(quoteData.calculatedCost);
 
   const calculateCost = (hours: number) => {
-    // Market average costs (example calculations)
-    const dailyKwh = quoteData.kwhUsage / 30; // Daily usage
-    const backupKwh = (dailyKwh / 24) * hours; // Backup capacity needed
+    // Improved cost calculation based on actual kWh usage
+    const monthlyKwh = quoteData.kwhUsage;
+    const dailyKwh = monthlyKwh / 30;
+    const hourlyKwh = dailyKwh / 24;
+    const backupKwh = hourlyKwh * hours;
     
-    // LiFePO4 battery cost per kWh (example: $400/kWh)
-    const batteryAhNeeded = Math.ceil(backupKwh * 1000 / 12); // Assuming 12V system
-    const batteryCost = batteryAhNeeded * 0.15; // $0.15 per Ah approximation
+    // LiFePO4 battery cost (realistic pricing: $300-600/kWh installed)
+    const batteryCostPerKwh = 450; // $450/kWh installed
+    const batteryCost = backupKwh * batteryCostPerKwh;
     
-    // Base costs
-    const laborCost = quoteData.installationType === 'business' ? 1200 : 800;
-    const inverterCost = backupKwh > 5 ? 1500 : 800;
-    const materialsCost = 400;
+    // Usage-based scaling factors
+    const usageMultiplier = Math.max(0.8, Math.min(2.0, monthlyKwh / 1000)); // Scale based on usage
+    const complexityMultiplier = quoteData.installationType === 'business' ? 1.4 : 1.0;
     
-    const totalCost = batteryCost + laborCost + inverterCost + materialsCost;
+    // Dynamic costs based on system size
+    const baseLabor = quoteData.installationType === 'business' ? 1500 : 1000;
+    const laborCost = Math.round(baseLabor * usageMultiplier * complexityMultiplier);
+    
+    const baseInverter = backupKwh < 3 ? 800 : backupKwh < 8 ? 1200 : 2000;
+    const inverterCost = Math.round(baseInverter * usageMultiplier);
+    
+    const baseMaterials = 300;
+    const materialsCost = Math.round(baseMaterials * usageMultiplier);
+    
+    // Permits and certifications
+    const permitsCost = quoteData.installationType === 'business' ? 800 : 400;
+    
+    const totalCost = batteryCost + laborCost + inverterCost + materialsCost + permitsCost;
     
     return {
-      batteryAhNeeded,
+      batteryAhNeeded: Math.ceil(backupKwh * 83.33), // Convert kWh to Ah at 12V
+      batteryCost: Math.round(batteryCost),
       laborCost,
       inverterCost,
       materialsCost,
+      permitsCost,
       totalCost: Math.round(totalCost),
     };
   };
@@ -174,20 +190,28 @@ export const BackupDurationStep = ({ quoteData, updateQuoteData, onNext, onPrev 
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Battery ({calculatedCost.batteryAhNeeded || 0}Ah):</span>
                   <span className="font-medium text-foreground">
-                    ${(calculatedCost.totalCost - calculatedCost.laborCost - calculatedCost.inverterCost - calculatedCost.materialsCost).toLocaleString()}
+                    ${calculatedCost.batteryCost?.toLocaleString() || '0'}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Labor:</span>
+                  <span className="text-muted-foreground">Labor & Install:</span>
                   <span className="font-medium text-foreground">${calculatedCost.laborCost.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Inverter:</span>
+                  <span className="text-muted-foreground">Inverter System:</span>
                   <span className="font-medium text-foreground">${calculatedCost.inverterCost.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Materials:</span>
+                  <span className="text-muted-foreground">Materials & Wiring:</span>
                   <span className="font-medium text-foreground">${calculatedCost.materialsCost.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Permits & Certs:</span>
+                  <span className="font-medium text-foreground">${calculatedCost.permitsCost?.toLocaleString() || '0'}</span>
+                </div>
+                <div className="flex justify-between text-base font-semibold pt-2 border-t">
+                  <span className="text-foreground">Total System Cost:</span>
+                  <span className="text-primary">${calculatedCost.totalCost.toLocaleString()}</span>
                 </div>
               </div>
             </div>
