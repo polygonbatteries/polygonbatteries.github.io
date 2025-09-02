@@ -2,12 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { Battery, Shield, Clock, Wrench, Menu } from "lucide-react";
+import { Battery, Shield, Clock, Wrench, Menu, BatteryCharging } from "lucide-react";
 import { useState } from "react";
 import { BatterySearchBar } from "@/components/BatterySearchBar";
 import heroImage from "@/assets/hero-battery-installation.jpg";
 import residentialImage from "@/assets/residential-installation.jpg";
 import commercialImage from "@/assets/commercial-installation.jpg";
+import dashboardImage from "@/assets/battery-cloud-dashboard.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -176,30 +177,17 @@ const Home = () => {
             </Card>
 
             <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group">
-              <div className="w-full h-48 rounded-lg mb-6 bg-gradient-to-br from-green-100 to-blue-100 p-4 flex items-center justify-center">
-                <div className="text-center">
-                  <Battery className="w-16 h-16 text-primary mx-auto mb-2" />
-                  <div className="text-xs text-muted-foreground">QR Monitoring</div>
-                </div>
-              </div>
+              <img 
+                src={dashboardImage} 
+                alt="Battery Cloud Dashboard" 
+                className="w-full h-48 object-cover rounded-lg mb-6"
+              />
               <h3 className="text-2xl font-bold text-foreground mb-4">Polygon Batteries Cloud</h3>
               <p className="text-muted-foreground mb-6">
-                Track every battery we sell through BMS or QR codes. Monitor performance, usage patterns, and get replacement alerts for all your devices.
+                Track every battery through BMS or QR codes. Monitor performance and get replacement alerts for all your devices.
               </p>
-              <div className="text-sm text-muted-foreground mb-4">
-                <div className="grid grid-cols-2 gap-1">
-                  <div>• TV remotes</div>
-                  <div>• Car key fobs</div>
-                  <div>• Smartphones</div>
-                  <div>• Smart speakers</div>
-                  <div>• AirPods</div>
-                  <div>• Laptops</div>
-                  <div>• Smartwatches</div>
-                  <div>• Game controllers</div>
-                </div>
-              </div>
               <Button variant="hero" size="lg" className="w-full group-hover:scale-105 transition-transform">
-                View Dashboard <Battery className="ml-2 h-5 w-5" />
+                View Dashboard <BatteryCharging className="ml-2 h-5 w-5" />
               </Button>
             </Card>
           </div>
