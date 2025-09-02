@@ -65,7 +65,7 @@ const Home = () => {
               <h1 className="text-xl md:text-2xl font-bold text-foreground">Polygon Batteries</h1>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
-              <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
+              <a href="#order-options" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
               <Button variant="outline" onClick={() => navigate('/battery-finder')}>
                 Battery Finder
               </Button>
@@ -127,7 +127,7 @@ const Home = () => {
           </p>
           
           {/* Main CTA Buttons */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center items-start mb-16 max-w-7xl mx-auto">
+          <div id="order-options" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center items-start mb-16 max-w-7xl mx-auto">
             <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group"
                   onClick={() => navigate('/order/home')}>
               <img 
