@@ -105,7 +105,7 @@ const Home = () => {
             <img 
               src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" 
               alt="Polygon Batteries" 
-              className="w-48 h-auto md:w-64 md:h-auto mx-auto mb-2"
+              className="w-72 h-auto md:w-96 md:h-auto mx-auto mb-2"
             />
           </div>
           
