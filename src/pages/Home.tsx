@@ -101,11 +101,11 @@ const Home = () => {
         ></div>
         <div className="relative container mx-auto px-4 text-center">
           {/* Logo above hero text */}
-          <div className="mb-8">
+          <div className="mb-4">
             <img 
               src="/lovable-uploads/2b9c5406-8840-4d0d-8fb8-6fda079b815b.png" 
               alt="Polygon Batteries" 
-              className="w-64 h-64 md:w-80 md:h-80 mx-auto mb-4"
+              className="w-48 h-auto md:w-64 md:h-auto mx-auto mb-2"
             />
           </div>
           
