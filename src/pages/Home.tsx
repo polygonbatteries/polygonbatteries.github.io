@@ -58,7 +58,9 @@ const Home = () => {
               <Button variant="outline" onClick={() => navigate('/battery-finder')}>
                 Battery Finder
               </Button>
-              <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+              <Button variant="ghost" onClick={() => navigate('/contact')} className="text-muted-foreground hover:text-foreground transition-colors">
+                Contact
+              </Button>
             </nav>
             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <Menu className="h-6 w-6" />
@@ -69,7 +71,9 @@ const Home = () => {
               <Button variant="outline" onClick={() => navigate('/battery-finder')} className="w-full">
                 Battery Finder
               </Button>
-              <a href="#contact" className="block text-muted-foreground hover:text-foreground transition-colors py-2">Contact</a>
+              <Button variant="ghost" onClick={() => navigate('/contact')} className="block text-muted-foreground hover:text-foreground transition-colors py-2 w-full justify-start">
+                Contact
+              </Button>
             </nav>}
         </div>
       </header>

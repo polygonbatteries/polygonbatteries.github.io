@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import OrderPage from "./pages/OrderPage";
 import BatteryFinder from "./pages/BatteryFinder";
 import OEMPortal from "./pages/OEMPortal";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/order/:type" element={<OrderPage />} />
           <Route path="/battery-finder" element={<BatteryFinder />} />
           <Route path="/oem-portal" element={<OEMPortal />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
