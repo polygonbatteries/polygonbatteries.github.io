@@ -8,6 +8,7 @@ import OrderPage from "./pages/OrderPage";
 import BatteryFinder from "./pages/BatteryFinder";
 import OEMPortal from "./pages/OEMPortal";
 import Contact from "./pages/Contact";
+import BatteryDashboard from "./pages/BatteryDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/battery-finder" element={<BatteryFinder />} />
           <Route path="/oem-portal" element={<OEMPortal />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/dashboard" element={<BatteryDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

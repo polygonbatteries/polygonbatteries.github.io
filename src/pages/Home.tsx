@@ -137,7 +137,7 @@ const Home = () => {
               </Button>
             </Card>
 
-            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group h-full flex flex-col">
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/30 hover:border-primary/60 transition-all duration-300 cursor-pointer group h-full flex flex-col" onClick={() => navigate('/dashboard')}>
               <img src="/lovable-uploads/cf318afd-38d2-4336-b796-5d6acdd72e15.png" alt="Battery Cloud Monitoring" className="w-full h-48 object-contain rounded-lg mb-6 bg-gradient-to-br from-blue-50 to-gray-50 p-2" />
               <h3 className="text-2xl font-bold text-foreground mb-4">Polygon Batteries Cloud</h3>
               <p className="text-muted-foreground mb-6 flex-grow">
