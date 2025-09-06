@@ -144,26 +144,26 @@ const BatteryDashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
         <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
             <TabsTrigger value="add-battery">Add Battery</TabsTrigger>
           </TabsList>
 
           <TabsContent value="dashboard" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              <Card className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Total Batteries</p>
                     <p className="text-2xl font-bold">{batteries.length}</p>
                   </div>
-                  <Battery className="h-8 w-8 text-primary" />
+                  <Battery className="h-6 w-6 text-primary" />
                 </div>
               </Card>
               
-              <Card className="p-6">
+              <Card className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Average Charge</p>
@@ -171,11 +171,11 @@ const BatteryDashboard = () => {
                       {Math.round(batteries.reduce((acc, b) => acc + b.currentCharge, 0) / batteries.length)}%
                     </p>
                   </div>
-                  <BatteryCharging className="h-8 w-8 text-primary" />
+                  <BatteryCharging className="h-6 w-6 text-primary" />
                 </div>
               </Card>
               
-              <Card className="p-6">
+              <Card className="p-4 sm:col-span-2 lg:col-span-1">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Health Status</p>
@@ -183,19 +183,19 @@ const BatteryDashboard = () => {
                       {batteries.filter(b => b.status === "healthy").length}/{batteries.length}
                     </p>
                   </div>
-                  <CheckCircle className="h-8 w-8 text-green-600" />
+                  <CheckCircle className="h-6 w-6 text-green-600" />
                 </div>
               </Card>
             </div>
 
-            <div className="space-y-4">
+            <div className="max-w-4xl mx-auto space-y-4">
               <h3 className="text-lg font-semibold">Your Batteries</h3>
-              <div className="grid gap-4">
+              <div className="space-y-3">
                 {batteries.map((battery) => (
-                  <Card key={battery.id} className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h4 className="font-semibold text-lg">{battery.name}</h4>
+                  <Card key={battery.id} className="p-4">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <h4 className="font-semibold">{battery.name}</h4>
                         <p className="text-sm text-muted-foreground">ID: {battery.id}</p>
                         <div className="flex items-center gap-2 mt-1">
                           {getStatusIcon(battery.status)}
@@ -204,7 +204,7 @@ const BatteryDashboard = () => {
                           </span>
                         </div>
                       </div>
-                      <Badge variant="outline">{battery.type}</Badge>
+                      <Badge variant="outline" className="mt-2 sm:mt-0">{battery.type}</Badge>
                     </div>
                     
                     <div className="space-y-3">
@@ -216,7 +216,7 @@ const BatteryDashboard = () => {
                         <Progress value={battery.currentCharge} className="h-2" />
                       </div>
                       
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
                         <div>
                           <p className="text-muted-foreground">Capacity</p>
                           <p className="font-medium">{battery.capacity}</p>
@@ -235,7 +235,7 @@ const BatteryDashboard = () => {
                         </div>
                       </div>
                       
-                      <div className="flex items-center justify-between pt-2 border-t">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-2 border-t gap-2">
                         <div className="flex items-center gap-1 text-sm text-muted-foreground">
                           <Clock className="h-3 w-3" />
                           Last sync: {battery.lastSync}
@@ -252,79 +252,81 @@ const BatteryDashboard = () => {
           </TabsContent>
 
           <TabsContent value="add-battery" className="space-y-6">
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Add New Battery</h3>
-              
-              <div className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Card className="p-4 cursor-pointer hover:bg-accent transition-colors" onClick={() => handleScan("barcode")}>
-                    <div className="flex flex-col items-center text-center space-y-3">
-                      <div className="p-3 bg-primary/10 rounded-full">
-                        <Scan className="h-6 w-6 text-primary" />
+            <div className="max-w-2xl mx-auto">
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Add New Battery</h3>
+                
+                <div className="space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <Card className="p-4 cursor-pointer hover:bg-accent transition-colors" onClick={() => handleScan("barcode")}>
+                      <div className="flex flex-col items-center text-center space-y-3">
+                        <div className="p-3 bg-primary/10 rounded-full">
+                          <Scan className="h-6 w-6 text-primary" />
+                        </div>
+                        <h4 className="font-medium">Scan Barcode</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Use your device camera to scan the battery barcode
+                        </p>
+                        {isScanning && (
+                          <Badge variant="secondary" className="animate-pulse">
+                            Scanning...
+                          </Badge>
+                        )}
                       </div>
-                      <h4 className="font-medium">Scan Barcode</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Use your device camera to scan the battery barcode
-                      </p>
-                      {isScanning && (
-                        <Badge variant="secondary" className="animate-pulse">
-                          Scanning...
-                        </Badge>
-                      )}
-                    </div>
-                  </Card>
-                  
-                  <Card className="p-4 cursor-pointer hover:bg-accent transition-colors" onClick={() => handleScan("qr")}>
-                    <div className="flex flex-col items-center text-center space-y-3">
-                      <div className="p-3 bg-primary/10 rounded-full">
-                        <QrCode className="h-6 w-6 text-primary" />
-                      </div>
-                      <h4 className="font-medium">Scan QR Code</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Scan the QR code on your battery for instant setup
-                      </p>
-                      {isScanning && (
-                        <Badge variant="secondary" className="animate-pulse">
-                          Scanning...
-                        </Badge>
-                      )}
-                    </div>
-                  </Card>
-                </div>
-
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">Or</span>
-                  </div>
-                </div>
-
-                <Card className="p-4">
-                  <h4 className="font-medium mb-4">Manual Entry</h4>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium">Battery ID / Serial Number</label>
-                      <Input
-                        placeholder="Enter battery identification number"
-                        value={batteryId}
-                        onChange={(e) => setBatteryId(e.target.value)}
-                        className="mt-1"
-                      />
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Usually found on a label on your battery (e.g., PB-2024-XXX)
-                      </p>
-                    </div>
+                    </Card>
                     
-                    <Button onClick={handleManualAdd} className="w-full">
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Battery
-                    </Button>
+                    <Card className="p-4 cursor-pointer hover:bg-accent transition-colors" onClick={() => handleScan("qr")}>
+                      <div className="flex flex-col items-center text-center space-y-3">
+                        <div className="p-3 bg-primary/10 rounded-full">
+                          <QrCode className="h-6 w-6 text-primary" />
+                        </div>
+                        <h4 className="font-medium">Scan QR Code</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Scan the QR code on your battery for instant setup
+                        </p>
+                        {isScanning && (
+                          <Badge variant="secondary" className="animate-pulse">
+                            Scanning...
+                          </Badge>
+                        )}
+                      </div>
+                    </Card>
                   </div>
-                </Card>
-              </div>
-            </Card>
+
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-background px-2 text-muted-foreground">Or</span>
+                    </div>
+                  </div>
+
+                  <Card className="p-4">
+                    <h4 className="font-medium mb-4">Manual Entry</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium">Battery ID / Serial Number</label>
+                        <Input
+                          placeholder="Enter battery identification number"
+                          value={batteryId}
+                          onChange={(e) => setBatteryId(e.target.value)}
+                          className="mt-1"
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Usually found on a label on your battery (e.g., PB-2024-XXX)
+                        </p>
+                      </div>
+                      
+                      <Button onClick={handleManualAdd} className="w-full">
+                        <Plus className="h-4 w-4 mr-2" />
+                        Add Battery
+                      </Button>
+                    </div>
+                  </Card>
+                </div>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
