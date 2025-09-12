@@ -6,16 +6,19 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { CreditCard, ArrowLeft, Lock, CheckCircle } from "lucide-react";
 import { OrderData as QuoteData } from "../OrderWizard";
+import { OrderSuccessPopup } from "../OrderSuccessPopup";
 
 interface CheckoutStepProps {
   quoteData: QuoteData;
   onPrev: () => void;
+  onComplete?: (orderData: QuoteData) => void;
 }
 
-export const CheckoutStep = ({ quoteData, onPrev }: CheckoutStepProps) => {
+export const CheckoutStep = ({ quoteData, onPrev, onComplete }: CheckoutStepProps) => {
   const [paymentMethod, setPaymentMethod] = useState('credit');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handlePayment = async () => {
     setIsProcessing(true);
@@ -24,6 +27,8 @@ export const CheckoutStep = ({ quoteData, onPrev }: CheckoutStepProps) => {
     setTimeout(() => {
       setIsProcessing(false);
       setIsComplete(true);
+      setShowSuccessPopup(true);
+      onComplete?.(quoteData);
     }, 3000);
   };
 
@@ -180,6 +185,12 @@ export const CheckoutStep = ({ quoteData, onPrev }: CheckoutStepProps) => {
             {isProcessing ? 'Processing...' : `Pay $${quoteData.calculatedCost.totalCost.toLocaleString()}`}
           </Button>
         </div>
+
+        <OrderSuccessPopup
+          orderData={quoteData}
+          isOpen={showSuccessPopup}
+          onClose={() => setShowSuccessPopup(false)}
+        />
       </div>
     </Card>
   );
