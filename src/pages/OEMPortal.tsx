@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { ShapeSelector } from "@/components/ShapeSelector";
 import { BatteryCalculator } from "@/components/BatteryCalculator";
 import { BatteryShape } from "@/components/BatteryShape3D";
+import { PostPurchaseChat } from "@/components/PostPurchaseChat";
 
 export default function OEMPortal() {
   const [batterySpecs, setBatterySpecs] = useState({
@@ -37,6 +38,8 @@ export default function OEMPortal() {
   const [estimatedCost, setEstimatedCost] = useState(0);
   const [activeTab, setActiveTab] = useState("design");
   const [isSpecsComplete, setIsSpecsComplete] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+  const [orderId] = useState(() => `OEM-${Date.now().toString().slice(-6)}`);
 
   const checkSpecsComplete = () => {
     const volume = parseFloat(batterySpecs.length) * parseFloat(batterySpecs.width) * parseFloat(batterySpecs.height);
@@ -98,8 +101,8 @@ export default function OEMPortal() {
     
     // Simulate API call
     setTimeout(() => {
-      toast.success("Detailed quote generated and sent to " + clientInfo.email);
-      setActiveTab("quote");
+      toast.success("OEM Order confirmed! Opening chat with our team...");
+      setShowChat(true);
     }, 1500);
   };
 
@@ -543,6 +546,34 @@ export default function OEMPortal() {
           </Tabs>
         </div>
       </main>
+
+      <PostPurchaseChat
+        orderData={{
+          installationType: 'business',
+          kwhUsage: parseInt(batterySpecs.capacity) || 0,
+          backupDuration: 'custom',
+          customDuration: 24,
+          address: {
+            street: clientInfo.company || 'OEM Location',
+            city: 'Commercial',
+            state: 'N/A',
+            zipCode: '00000',
+          },
+          calculatedCost: {
+            batteryCost: estimatedCost,
+            laborCost: 0,
+            inverterCost: 0,
+            materialsCost: 2500,
+            totalCost: estimatedCost,
+          },
+        }}
+        orderId={orderId}
+        isOpen={showChat}
+        onClose={() => {
+          setShowChat(false);
+          window.location.href = '/';
+        }}
+      />
     </div>
   );
 }

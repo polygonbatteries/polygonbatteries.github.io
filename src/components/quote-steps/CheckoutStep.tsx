@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { CreditCard, ArrowLeft, Lock, CheckCircle } from "lucide-react";
 import { OrderData as QuoteData } from "../OrderWizard";
-import { OrderSuccessPopup } from "../OrderSuccessPopup";
+import { PostPurchaseChat } from "../PostPurchaseChat";
 
 interface CheckoutStepProps {
   quoteData: QuoteData;
@@ -18,7 +18,8 @@ export const CheckoutStep = ({ quoteData, onPrev, onComplete }: CheckoutStepProp
   const [paymentMethod, setPaymentMethod] = useState('credit');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+  const [orderId] = useState(() => `PB-${Date.now().toString().slice(-6)}`);
 
   const handlePayment = async () => {
     setIsProcessing(true);
@@ -27,27 +28,22 @@ export const CheckoutStep = ({ quoteData, onPrev, onComplete }: CheckoutStepProp
     setTimeout(() => {
       setIsProcessing(false);
       setIsComplete(true);
-      setShowSuccessPopup(true);
+      setShowChat(true);
       onComplete?.(quoteData);
     }, 3000);
   };
 
-  if (isComplete) {
+  if (isComplete && showChat) {
     return (
-      <Card className="p-8 bg-card/80 backdrop-blur-sm text-center">
-        <CheckCircle className="h-16 w-16 text-success mx-auto mb-6" />
-        <h3 className="text-2xl font-bold text-foreground mb-4">Order Confirmed!</h3>
-        <p className="text-muted-foreground mb-6">
-          Thank you for choosing Polygon Batteries. We'll contact you within 24 hours to schedule your installation.
-        </p>
-        <Card className="p-4 bg-primary/10 border-primary/30 mb-6">
-          <p className="font-semibold text-foreground">Order #PB-{Date.now().toString().slice(-6)}</p>
-          <p className="text-sm text-muted-foreground">Confirmation email sent to your address</p>
-        </Card>
-        <Button variant="electric" size="lg" onClick={() => window.location.href = '/'}>
-          Return to Home
-        </Button>
-      </Card>
+      <PostPurchaseChat
+        orderData={quoteData}
+        orderId={orderId}
+        isOpen={true}
+        onClose={() => {
+          setShowChat(false);
+          window.location.href = '/';
+        }}
+      />
     );
   }
 
@@ -186,11 +182,6 @@ export const CheckoutStep = ({ quoteData, onPrev, onComplete }: CheckoutStepProp
           </Button>
         </div>
 
-        <OrderSuccessPopup
-          orderData={quoteData}
-          isOpen={showSuccessPopup}
-          onClose={() => setShowSuccessPopup(false)}
-        />
       </div>
     </Card>
   );

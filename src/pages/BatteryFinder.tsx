@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Upload, Search, Battery, Cpu } from "lucide-react";
+import { PostPurchaseChat } from "@/components/PostPurchaseChat";
 import { toast } from "sonner";
 
 export default function BatteryFinder() {
@@ -10,6 +11,9 @@ export default function BatteryFinder() {
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [results, setResults] = useState<any[]>([]);
+  const [showChat, setShowChat] = useState(false);
+  const [selectedBattery, setSelectedBattery] = useState<any>(null);
+  const [orderId] = useState(() => `BAT-${Date.now().toString().slice(-6)}`);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -160,8 +164,17 @@ export default function BatteryFinder() {
                       </div>
                       <div className="text-right">
                         <p className="text-lg font-bold text-primary">${battery.price}</p>
-                        <Button size="sm" variant="outline" className="mt-2">
-                          Add to Cart
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="mt-2"
+                          onClick={() => {
+                            setSelectedBattery(battery);
+                            setShowChat(true);
+                            toast.success("Battery ordered! Opening chat for installation...");
+                          }}
+                        >
+                          Order Battery
                         </Button>
                       </div>
                     </div>
@@ -177,6 +190,33 @@ export default function BatteryFinder() {
           </Card>
         </div>
       </main>
+
+      <PostPurchaseChat
+        orderData={{
+          installationType: 'home',
+          kwhUsage: parseInt(selectedBattery?.capacity) || 3000,
+          backupDuration: '8 hours',
+          address: {
+            street: 'Battery Installation Address',
+            city: 'City',
+            state: 'State',
+            zipCode: '12345',
+          },
+          calculatedCost: {
+            batteryCost: selectedBattery?.price || 299,
+            laborCost: 150,
+            inverterCost: 0,
+            materialsCost: 50,
+            totalCost: (selectedBattery?.price || 299) + 200,
+          },
+        }}
+        orderId={orderId}
+        isOpen={showChat}
+        onClose={() => {
+          setShowChat(false);
+          setSelectedBattery(null);
+        }}
+      />
     </div>
   );
 }
