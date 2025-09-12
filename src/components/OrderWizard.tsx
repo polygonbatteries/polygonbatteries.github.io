@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -125,6 +125,10 @@ export const OrderWizard = ({ installationType }: OrderWizardProps) => {
           <CheckoutStep
             quoteData={orderData}
             onPrev={prevStep}
+            onComplete={(orderData) => {
+              console.log('Order completed:', orderData);
+              // The CheckoutStep will handle showing the popup
+            }}
           />
         );
       default:
