@@ -19,6 +19,7 @@ import {
   Wrench
 } from "lucide-react";
 import { OrderData } from "./OrderWizard";
+import { useAuth } from "./AuthProvider";
 
 interface Message {
   id: string;
@@ -38,6 +39,8 @@ interface PostPurchaseChatProps {
 type OrderStatus = 'pending' | 'scheduled' | 'in-progress' | 'completed' | 'accepted' | 'rated';
 
 export const PostPurchaseChat = ({ orderData, orderId, isOpen, onClose }: PostPurchaseChatProps) => {
+  const { user, loading } = useAuth();
+  const [authRequired, setAuthRequired] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [orderStatus, setOrderStatus] = useState<OrderStatus>('pending');
@@ -202,8 +205,56 @@ export const PostPurchaseChat = ({ orderData, orderId, isOpen, onClose }: PostPu
     );
   };
 
+  // Handle authentication requirement
+  const handleClose = () => {
+    if (!user) {
+      setAuthRequired(true);
+      return;
+    }
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  if (loading) {
+    return (
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent className="max-w-md h-40 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  if (!user || authRequired) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center">Sign In Required</DialogTitle>
+          </DialogHeader>
+          <div className="py-6 text-center space-y-4">
+            <User className="h-12 w-12 mx-auto text-muted-foreground" />
+            <p className="text-muted-foreground">
+              Please sign in to access your order chat and track your installation progress.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              This ensures your conversation is saved and secure.
+            </p>
+            <Button onClick={() => {
+              setAuthRequired(false);
+              onClose();
+            }} className="w-full">
+              Sign In to Continue
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-3xl max-h-[85vh] flex flex-col p-0">
         <DialogHeader className="p-6 pb-4">
           <DialogTitle className="flex items-center justify-between">
