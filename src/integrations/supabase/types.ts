@@ -7,14 +7,112 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
   }
   public: {
     Tables: {
-      [_ in never]: never
+      order_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          message_type: string | null
+          order_id: string
+          sender: string
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          message_type?: string | null
+          order_id: string
+          sender: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          message_type?: string | null
+          order_id?: string
+          sender?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_email: string
+          electrician_name: string | null
+          id: string
+          order_data: Json
+          order_id: string
+          order_type: string
+          scheduled_date: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          electrician_name?: string | null
+          id?: string
+          order_data: Json
+          order_id: string
+          order_type: string
+          scheduled_date?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          electrician_name?: string | null
+          id?: string
+          order_data?: Json
+          order_id?: string
+          order_type?: string
+          scheduled_date?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
