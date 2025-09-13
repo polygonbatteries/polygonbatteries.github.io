@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Battery, Shield, Clock, Wrench, Menu, BatteryCharging } from "lucide-react";
 import { useState } from "react";
 import { BatterySearchBar } from "@/components/BatterySearchBar";
+import { UserAvatar } from "@/components/UserAvatar";
 import heroImage from "@/assets/hero-battery-installation.jpg";
 import residentialImage from "@/assets/residential-installation.jpg";
 import commercialImage from "@/assets/commercial-installation.jpg";
@@ -61,6 +62,7 @@ const Home = () => {
               <Button variant="ghost" onClick={() => navigate('/contact')} className="text-muted-foreground hover:text-foreground transition-colors">
                 Contact
               </Button>
+              <UserAvatar />
             </nav>
             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <Menu className="h-6 w-6" />
@@ -74,6 +76,9 @@ const Home = () => {
               <Button variant="ghost" onClick={() => navigate('/contact')} className="block text-muted-foreground hover:text-foreground transition-colors py-2 w-full justify-start">
                 Contact
               </Button>
+              <div className="flex justify-center pt-2">
+                <UserAvatar />
+              </div>
             </nav>}
         </div>
       </header>

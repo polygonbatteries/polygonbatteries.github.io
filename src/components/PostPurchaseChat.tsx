@@ -186,17 +186,17 @@ export const PostPurchaseChat = ({ orderData, orderId, isOpen, onClose }: PostPu
 
   const getStatusBadge = () => {
     const statusConfig = {
-      pending: { color: 'bg-yellow-500', text: 'Pending' },
-      scheduled: { color: 'bg-blue-500', text: 'Scheduled' },
-      'in-progress': { color: 'bg-purple-500', text: 'In Progress' },
-      completed: { color: 'bg-green-500', text: 'Completed' },
-      accepted: { color: 'bg-emerald-500', text: 'Accepted & Paid' },
-      rated: { color: 'bg-indigo-500', text: 'Rated' }
+      pending: { variant: 'outline' as const, text: 'Pending', className: 'border-warning text-warning' },
+      scheduled: { variant: 'outline' as const, text: 'Scheduled', className: 'border-primary text-primary' },
+      'in-progress': { variant: 'outline' as const, text: 'In Progress', className: 'border-electric-cyan text-electric-cyan' },
+      completed: { variant: 'outline' as const, text: 'Completed', className: 'border-success text-success' },
+      accepted: { variant: 'default' as const, text: 'Accepted & Paid', className: 'bg-success text-white' },
+      rated: { variant: 'default' as const, text: 'Rated', className: 'bg-primary text-primary-foreground' }
     };
 
     const config = statusConfig[orderStatus];
     return (
-      <Badge className={`${config.color} text-white`}>
+      <Badge variant={config.variant} className={config.className}>
         {config.text}
       </Badge>
     );
@@ -204,99 +204,101 @@ export const PostPurchaseChat = ({ orderData, orderId, isOpen, onClose }: PostPu
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <MessageCircle className="h-5 w-5" />
-            Order #{orderId} - Installation Chat
+      <DialogContent className="max-w-3xl max-h-[85vh] flex flex-col p-0">
+        <DialogHeader className="p-6 pb-4">
+          <DialogTitle className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <MessageCircle className="h-5 w-5" />
+              Order #{orderId} - Installation Chat
+            </div>
             {getStatusBadge()}
           </DialogTitle>
         </DialogHeader>
 
-        {/* Customer Address */}
-        <Card className="p-3 bg-secondary/30">
-          <div className="flex items-center gap-2 text-sm">
-            <MapPin className="h-4 w-4 text-primary" />
-            <span className="font-medium">Installation Address:</span>
-            <span>{orderData.address.street}, {orderData.address.city}, {orderData.address.state} {orderData.address.zipCode}</span>
-          </div>
-        </Card>
+        <div className="flex-1 overflow-y-auto px-6 space-y-4">
+          {/* Customer Address */}
+          <Card className="p-4 bg-secondary/20">
+            <div className="flex items-center gap-2 text-sm">
+              <MapPin className="h-4 w-4 text-primary" />
+              <span className="font-medium">Installation Address:</span>
+              <span>{orderData.address.street}, {orderData.address.city}, {orderData.address.state} {orderData.address.zipCode}</span>
+            </div>
+          </Card>
 
-        {/* Electrician Info */}
-        <Card className="p-3 bg-primary/10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <Wrench className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <p className="font-medium">{electrician.name}</p>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                  <span>{electrician.rating} • {electrician.completedJobs} jobs</span>
+          {/* Electrician Info */}
+          <Card className="p-4 bg-primary/10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                  <Wrench className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <p className="font-medium text-base">{electrician.name}</p>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Star className="h-4 w-4 fill-warning text-warning" />
+                    <span>{electrician.rating} • {electrician.completedJobs} jobs completed</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <Badge variant="outline">{electrician.phone}</Badge>
-          </div>
-        </Card>
-
-        {/* Scheduling Section */}
-        {orderStatus === 'pending' && (
-          <Card className="p-4">
-            <h4 className="font-medium mb-3 flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              Schedule Installation
-            </h4>
-            <div className="grid grid-cols-4 gap-2 mb-3">
-              {timeSlots.map((slot) => (
-                <Button
-                  key={slot}
-                  variant={selectedTimeSlot === slot ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedTimeSlot(slot)}
-                  className="text-xs"
-                >
-                  {slot}
-                </Button>
-              ))}
-            </div>
-            <Button 
-              onClick={scheduleInstallation} 
-              disabled={!selectedTimeSlot}
-              className="w-full"
-            >
-              Schedule for Next Week
-            </Button>
-          </Card>
-        )}
-
-        {/* Scheduled Date Display */}
-        {scheduledDate && orderStatus !== 'pending' && (
-          <Card className="p-3 bg-blue-50 border-blue-200">
-            <div className="flex items-center gap-2 text-sm">
-              <Clock className="h-4 w-4 text-blue-600" />
-              <span className="font-medium">Scheduled:</span>
-              <span>{scheduledDate.toLocaleDateString()} at {selectedTimeSlot}</span>
+              <Badge variant="outline" className="text-xs">{electrician.phone}</Badge>
             </div>
           </Card>
-        )}
 
-        {/* Messages Area */}
-        <div className="flex-1 min-h-0">
-          <Card className="h-64 overflow-y-auto p-4 space-y-3">
+          {/* Scheduling Section */}
+          {orderStatus === 'pending' && (
+            <Card className="p-4">
+              <h4 className="font-medium mb-4 flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Schedule Installation
+              </h4>
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                {timeSlots.map((slot) => (
+                  <Button
+                    key={slot}
+                    variant={selectedTimeSlot === slot ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedTimeSlot(slot)}
+                    className="text-sm py-2"
+                  >
+                    {slot}
+                  </Button>
+                ))}
+              </div>
+              <Button 
+                onClick={scheduleInstallation} 
+                disabled={!selectedTimeSlot}
+                className="w-full"
+              >
+                Schedule for Next Week
+              </Button>
+            </Card>
+          )}
+
+          {/* Scheduled Date Display */}
+          {scheduledDate && orderStatus !== 'pending' && (
+            <Card className="p-4 bg-primary/10 border-primary/20">
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-primary" />
+                <span className="font-medium">Scheduled:</span>
+                <span>{scheduledDate.toLocaleDateString()} at {selectedTimeSlot}</span>
+              </div>
+            </Card>
+          )}
+
+          {/* Messages Area */}
+          <Card className="h-80 overflow-y-auto p-4 space-y-4 bg-muted/30">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.sender === 'customer' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[70%] p-3 rounded-lg ${
+                  className={`max-w-[75%] p-3 rounded-lg shadow-sm ${
                     message.sender === 'customer'
                       ? 'bg-primary text-primary-foreground'
                       : message.sender === 'system'
-                      ? 'bg-secondary text-secondary-foreground'
-                      : 'bg-muted text-muted-foreground'
+                      ? 'bg-accent text-accent-foreground border'
+                      : 'bg-card text-card-foreground border'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -306,8 +308,8 @@ export const PostPurchaseChat = ({ orderData, orderId, isOpen, onClose }: PostPu
                       {message.sender === 'system' ? 'System' : message.sender}
                     </span>
                   </div>
-                  <p className="text-sm">{message.content}</p>
-                  <p className="text-xs opacity-70 mt-1">
+                  <p className="text-sm leading-relaxed">{message.content}</p>
+                  <p className="text-xs opacity-70 mt-2">
                     {message.timestamp.toLocaleTimeString()}
                   </p>
                 </div>
@@ -317,76 +319,77 @@ export const PostPurchaseChat = ({ orderData, orderId, isOpen, onClose }: PostPu
           </Card>
         </div>
 
-        {/* Action Buttons */}
-        {orderStatus === 'scheduled' && (
-          <Card className="p-3">
+        <div className="p-6 pt-4 space-y-4 border-t bg-background">
+          {/* Action Buttons */}
+          {orderStatus === 'scheduled' && (
             <Button onClick={markCompleted} className="w-full" variant="outline">
+              <CheckCircle className="h-4 w-4 mr-2" />
               Mark Installation as Completed (Electrician)
             </Button>
-          </Card>
-        )}
+          )}
 
-        {orderStatus === 'completed' && (
-          <div className="grid grid-cols-2 gap-3">
-            <Button onClick={acceptWork} className="flex items-center gap-2" variant="default">
-              <CheckCircle className="h-4 w-4" />
-              Accept & Release Payment
-            </Button>
-            <Button onClick={rejectWork} variant="destructive" className="flex items-center gap-2">
-              <XCircle className="h-4 w-4" />
-              Reject - Schedule Fix
-            </Button>
-          </div>
-        )}
-
-        {orderStatus === 'accepted' && (
-          <Card className="p-4">
-            <h4 className="font-medium mb-3 flex items-center gap-2">
-              <Star className="h-4 w-4" />
-              Rate Your Experience
-            </h4>
-            <div className="flex gap-1 mb-3">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  key={star}
-                  onClick={() => setRating(star)}
-                  className="text-2xl"
-                >
-                  <Star
-                    className={`h-6 w-6 ${
-                      star <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                    }`}
-                  />
-                </button>
-              ))}
+          {orderStatus === 'completed' && (
+            <div className="grid grid-cols-2 gap-3">
+              <Button onClick={acceptWork} className="flex items-center gap-2" variant="default">
+                <CheckCircle className="h-4 w-4" />
+                Accept & Release Payment
+              </Button>
+              <Button onClick={rejectWork} variant="destructive" className="flex items-center gap-2">
+                <XCircle className="h-4 w-4" />
+                Reject - Schedule Fix
+              </Button>
             </div>
-            <Textarea
-              placeholder="Share your feedback (optional)"
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              className="mb-3"
-            />
-            <Button onClick={submitRating} disabled={rating === 0} className="w-full">
-              Submit Rating
-            </Button>
-          </Card>
-        )}
+          )}
 
-        {/* Message Input */}
-        {orderStatus !== 'rated' && (
-          <div className="flex gap-2">
-            <Input
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message..."
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-              className="flex-1"
-            />
-            <Button onClick={sendMessage} size="icon">
-              <Send className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
+          {orderStatus === 'accepted' && (
+            <Card className="p-4">
+              <h4 className="font-medium mb-3 flex items-center gap-2">
+                <Star className="h-4 w-4" />
+                Rate Your Experience
+              </h4>
+              <div className="flex gap-1 mb-3 justify-center">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => setRating(star)}
+                    className="p-1 hover:scale-110 transition-transform"
+                  >
+                    <Star
+                      className={`h-8 w-8 ${
+                        star <= rating ? 'fill-warning text-warning' : 'text-muted-foreground'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+              <Textarea
+                placeholder="Share your feedback (optional)"
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                className="mb-3"
+              />
+              <Button onClick={submitRating} disabled={rating === 0} className="w-full">
+                Submit Rating
+              </Button>
+            </Card>
+          )}
+
+          {/* Message Input */}
+          {orderStatus !== 'rated' && (
+            <div className="flex gap-2">
+              <Input
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                placeholder="Type your message..."
+                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                className="flex-1"
+              />
+              <Button onClick={sendMessage} size="icon">
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );
